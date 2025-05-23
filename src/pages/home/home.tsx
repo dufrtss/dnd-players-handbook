@@ -1,55 +1,55 @@
-import { Link } from "react-router-dom";
-import styles from "./Home.module.scss";
-import { Tooltip } from "../../components/Tooltip/Tooltip";
-import { api } from "../../api/api";
-import { useNavigate } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { Link } from 'react-router-dom'
+import styles from './Home.module.scss'
+import { Tooltip } from '../../components/tooltip/tooltip'
+import { api } from '../../api/api'
+import { useNavigate } from 'react-router-dom'
+import { useEffect, useState } from 'react'
 
 export function Home() {
-  const [characterList, setCharacterList] = useState([]);
-  const [loading, setLoading] = useState(false);
-  const [listLoading, setListLoading] = useState(false);
-  const [page, setPage] = useState(0);
-  const [maxPages, setMaxPages] = useState(0);
-  const navigate = useNavigate();
+  const [characterList, setCharacterList] = useState([])
+  const [loading, setLoading] = useState(false)
+  const [listLoading, setListLoading] = useState(false)
+  const [page, setPage] = useState(0)
+  const [maxPages, setMaxPages] = useState(0)
+  const navigate = useNavigate()
 
   async function handleCreateNewCharacter() {
-    setLoading(true);
+    setLoading(true)
 
     await api
-      .post("/characters/new-character")
-      .then((response) => navigate(`/character/${response.data.id}/create`));
-    setLoading(false);
+      .post('/characters/new-character')
+      .then((response) => navigate(`/character/${response.data.id}/create`))
+    setLoading(false)
   }
 
   async function getCharactersList() {
-    setListLoading(true);
+    setListLoading(true)
     await api
-      .get(`characters/user`, { params: { page: page, size: 12 } })
+      .get('characters/user', { params: { page: page, size: 12 } })
       .then((res: any) => {
-        setMaxPages(res.data.totalPages);
-        setCharacterList(res.data.content);
-      });
-    setListLoading(false);
+        setMaxPages(res.data.totalPages)
+        setCharacterList(res.data.content)
+      })
+    setListLoading(false)
   }
 
   async function handleNextPage() {
     if (page < maxPages + 1) {
-      const newPage = page + 1;
-      setPage(newPage);
+      const newPage = page + 1
+      setPage(newPage)
     }
   }
 
   async function handlePreviousPage() {
     if (page != 0) {
-      const newPage = page - 1;
-      setPage(newPage);
+      const newPage = page - 1
+      setPage(newPage)
     }
   }
 
   useEffect(() => {
-    getCharactersList();
-  }, [page]);
+    getCharactersList()
+  }, [page])
 
   return (
     <div className={styles.container}>
@@ -58,8 +58,8 @@ export function Home() {
         className={styles.newCharacter}
         onClick={handleCreateNewCharacter}
       >
-        <h2>{loading ? "Loading..." : "Criar novo"}</h2>
-        <h2 style={{ fontWeight: "bold" }}>+</h2>
+        <h2>{loading ? 'Loading...' : 'Criar novo'}</h2>
+        <h2 style={{ fontWeight: 'bold' }}>+</h2>
       </button>
 
       {listLoading && <h3>Loading...</h3>}
@@ -73,7 +73,7 @@ export function Home() {
                   <Tooltip tooltip={item.name}>
                     <p className={styles.charName}>{item.name}</p>
                   </Tooltip>
-                  <span style={{ fontWeight: "bold" }}>
+                  <span style={{ fontWeight: 'bold' }}>
                     {item.race?.raceType}
                   </span>
                   <span>{item.classType?.classType}</span>
@@ -107,5 +107,5 @@ export function Home() {
         </>
       )}
     </div>
-  );
+  )
 }

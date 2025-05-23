@@ -1,7 +1,7 @@
-import * as Accordion from "@radix-ui/react-accordion";
-import { ChevronDownIcon } from "@radix-ui/react-icons";
-import React, { ReactNode } from "react";
-import styles from "./AccordionItem.module.scss";
+import * as Accordion from '@radix-ui/react-accordion'
+import { ChevronDownIcon } from '@radix-ui/react-icons'
+import React, { ReactNode } from 'react'
+import styles from './accordion-item.module.scss'
 
 type AccordionItemType = {
   children: ReactNode;
@@ -15,7 +15,7 @@ type AccordionTriggerType = {
 
 export function AccordionItem({ children, title, value }: AccordionItemType) {
   const AccordionTrigger = React.forwardRef(
-    ({ children }: AccordionTriggerType, ref) => (
+    ({ children }: AccordionTriggerType) => (
       <Accordion.Header className={styles.accordionHeader}>
         <Accordion.Trigger className={styles.accordionTrigger}>
           {children}
@@ -27,7 +27,7 @@ export function AccordionItem({ children, title, value }: AccordionItemType) {
         </Accordion.Trigger>
       </Accordion.Header>
     )
-  );
+  )
 
   return (
     <Accordion.Item className={styles.accordionItem} value={value}>
@@ -36,5 +36,5 @@ export function AccordionItem({ children, title, value }: AccordionItemType) {
         <div className={styles.accordionContentText}>{children}</div>
       </Accordion.Content>
     </Accordion.Item>
-  );
+  )
 }

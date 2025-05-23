@@ -1,13 +1,13 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
-import { Root } from "./pages/Root/Root.tsx";
+import { Root } from "./layout/app/app-layout.tsx";
 import "./global.scss";
-import { Login } from "./pages/Login/Login.tsx";
-import { Profile } from "./pages/Profile/Profile";
-import { NewCharacter } from "./pages/NewCharacter/NewCharacter.tsx";
-import { Home } from "./pages/Home/Home.tsx";
-import { Sheet } from "./pages/Sheet/Sheet.tsx";
+import { Login } from "./pages/login/login.tsx";
+import { Profile } from "./pages/profile/profile.tsx";
+import { NewCharacter } from "./pages/new-character/new-character.tsx";
+import { Home } from "./pages/home/home.tsx";
+import { CharacterSheet } from "./pages/character-sheet/character-sheet.tsx";
 
 const router = createBrowserRouter([
   {
@@ -28,7 +28,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/character/:idCharacter/sheet",
-        element: <Sheet />,
+        element: <CharacterSheet />,
       },
       {
         path: "/profile",

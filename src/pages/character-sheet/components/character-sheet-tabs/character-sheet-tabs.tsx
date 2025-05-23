@@ -1,14 +1,14 @@
-import styles from "./SheetTabs.module.scss";
-import * as Tabs from "@radix-ui/react-tabs";
-import * as Accordion from "@radix-ui/react-accordion";
-import * as RadixHoverCard from "@radix-ui/react-hover-card";
-import { AccordionItem } from "../AccordionItem/AccordionItem";
-import { HoverCard } from "../HoverCard/HoverCard";
-import * as Dialog from "@radix-ui/react-dialog";
-import { Modal } from "../Modal/Modal";
-import { useParams } from "react-router";
-import { api } from "../../api/api";
-import { useEffect, useState } from "react";
+import styles from './SheetTabs.module.scss'
+import * as Tabs from '@radix-ui/react-tabs'
+import * as Accordion from '@radix-ui/react-accordion'
+import * as RadixHoverCard from '@radix-ui/react-hover-card'
+import { AccordionItem } from '../../../../components/AccordionItem/AccordionItem'
+import { HoverCard } from '../../../../components/HoverCard/HoverCard'
+import * as Dialog from '@radix-ui/react-dialog'
+import { Modal } from '../../../../components/Modal/Modal'
+import { useParams } from 'react-router'
+import { api } from '../../../../api/api'
+import { useEffect, useState } from 'react'
 
 type Item = {
   id: number;
@@ -17,37 +17,37 @@ type Item = {
   damage: string;
   name: string;
   properties: string[];
-  stealth: Boolean;
+  stealth: boolean;
   strength: number;
   type: string;
   value: { amount: number; currencyType: string };
   weight: number;
 };
 
-export function SheetTabs() {
-  const params = useParams();
-  const idCharacter: string = params.idCharacter!;
-  const [inventory, setInventory] = useState<Item[]>([]);
-  const [inventoryId, setInventoryId] = useState<number>();
-  const [loading, setLoading] = useState(false);
+export function CharacterSheetTabs() {
+  const params = useParams()
+  const idCharacter: string = params.idCharacter!
+  const [inventory, setInventory] = useState<Item[]>([])
+  const [inventoryId, setInventoryId] = useState<number>()
+  const [loading, setLoading] = useState(false)
 
   useEffect(() => {
-    getInventory();
-  }, []);
+    getInventory()
+  }, [])
 
   async function getInventory() {
-    setLoading(true);
+    setLoading(true)
     await api.get(`inventories/character/${idCharacter}`).then((res) => {
-      const data = res?.data?.items;
-      const inventoryId = res?.data?.id;
-      setInventory(data as Item[]);
-      setInventoryId(inventoryId);
-    });
-    setLoading(false);
+      const data = res?.data?.items
+      const inventoryId = res?.data?.id
+      setInventory(data as Item[])
+      setInventoryId(inventoryId)
+    })
+    setLoading(false)
   }
 
   async function onDeleteItem(item: number) {
-    await api.delete(`items/${item}`).then(() => getInventory());
+    await api.delete(`items/${item}`).then(() => getInventory())
   }
 
   return (
@@ -152,8 +152,8 @@ export function SheetTabs() {
           </div>
           <div>
             <h3>Items</h3>
-            {loading && "Loading Items..."}
-            {!loading && !inventory.length && "No Items yet."}
+            {loading && 'Loading Items...'}
+            {!loading && !inventory.length && 'No Items yet.'}
             {!loading && !!inventory.length && (
               <table cellSpacing="0">
                 <thead>
@@ -171,7 +171,7 @@ export function SheetTabs() {
                         <td>{item.name}</td>
                         <td>{item.weight}</td>
                         <td>
-                          {item.value.amount}{" "}
+                          {item.value.amount}{' '}
                           {item.value.currencyType.toLowerCase()}
                         </td>
                         <td onClick={() => onDeleteItem(item.id)}>
@@ -183,7 +183,7 @@ export function SheetTabs() {
                           </svg>
                         </td>
                       </tr>
-                    );
+                    )
                   })}
                 </tbody>
               </table>
@@ -202,7 +202,7 @@ export function SheetTabs() {
 
       <Tabs.Content className={styles.tabsContent} value="tab4">
         <div
-          style={{ display: "flex", flexDirection: "column", height: "100%" }}
+          style={{ display: 'flex', flexDirection: 'column', height: '100%' }}
         >
           <div className={styles.spells}>
             <div className={styles.spellsAttributes}>
@@ -224,7 +224,7 @@ export function SheetTabs() {
               <div className={styles.spellSlotsHeader}>
                 <div>Cantrips</div>
               </div>
-              <div style={{ display: "flex", height: "100%" }}>
+              <div style={{ display: 'flex', height: '100%' }}>
                 <ul>
                   <li>spell1</li>
                   <li>spell1</li>
@@ -380,5 +380,5 @@ export function SheetTabs() {
         </div>
       </Tabs.Content>
     </Tabs.Root>
-  );
+  )
 }

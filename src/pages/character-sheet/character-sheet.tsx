@@ -1,163 +1,162 @@
-import styles from "./Sheet.module.scss";
-import { useEffect, useState } from "react";
-import * as Slider from "@radix-ui/react-slider";
-import * as Checkbox from "@radix-ui/react-checkbox";
-import { Separator } from "../../components/Separator/Separator";
-import { CheckIcon } from "@radix-ui/react-icons";
-import { Tooltip } from "../../components/Tooltip/Tooltip";
-import { SheetTabs } from "../../components/SheetTabs/SheetTabs";
-import { useParams } from "react-router";
-import { api } from "../../api/api";
+import styles from './character-sheet.module.scss'
+import { useEffect, useState } from 'react'
+import * as Slider from '@radix-ui/react-slider'
+import * as Checkbox from '@radix-ui/react-checkbox'
+import { Separator } from '../../components/Separator/Separator'
+import { CheckIcon } from '@radix-ui/react-icons'
+import { Tooltip } from '../../components/tooltip/tooltip'
+import { CharacterSheetTabs } from './components/character-sheet-tabs/character-sheet-tabs'
+import { useParams } from 'react-router'
+import { api } from '../../api/api'
 
-export function Sheet() {
-  const params = useParams();
-  const [character, setCharacter] = useState();
-  const [skillList, setSkillList] = useState([]);
-  const [mapSkill, setMapSkill] = useState([]);
+export function CharacterSheet() {
+  const params = useParams()
+  const [character, setCharacter] = useState()
+  const [mapSkill, setMapSkill] = useState([])
 
   async function getCharacter() {
-    const idCharacter: string = params.idCharacter!;
+    const idCharacter: string = params.idCharacter!
 
     await api.get(`/characters/${idCharacter}`).then((res) => {
-      setCharacter(res.data);
-      setLife(res.data.life);
-      buildSkills(res.data!.skill);
-    });
+      setCharacter(res.data)
+      setLife(res.data.life)
+      buildSkills(res.data!.skill)
+    })
   }
 
   useEffect(() => {
-    getCharacter();
-  }, []);
+    getCharacter()
+  }, [])
 
   function buildSkills(skills) {
-    let mapSkill: any[] = [];
+    const mapSkill: any[] = []
     Object.entries(skills).map((skill: [string, unknown]) => {
-      let prof = false;
+      let prof = false
       switch (skill[0]) {
-        case "acrobatics":
-          prof = skill[1] >= dexModifier;
-          break;
-        case "animalHandling":
-          prof = skill[1] >= wisModifier;
-          break;
-        case "arcana":
-          prof = skill[1] >= intModifier;
-          break;
-        case "athletics":
-          prof = skill[1] >= strModifier;
-          break;
-        case "deception":
-          prof = skill[1] >= chaModifier;
-          break;
-        case "history":
-          prof = skill[1] >= intModifier;
-          break;
-        case "insight":
-          prof = skill[1] >= wisModifier;
-          break;
-        case "intimidation":
-          prof = skill[1] >= chaModifier;
-          break;
-        case "investigation":
-          prof = skill[1] >= intModifier;
-          break;
-        case "medicine":
-          prof = skill[1] >= wisModifier;
-          break;
-        case "nature":
-          prof = skill[1] >= intModifier;
-          break;
-        case "perception":
-          prof = skill[1] >= wisModifier;
-          break;
-        case "performance":
-          prof = skill[1] >= chaModifier;
-          break;
-        case "persuasion":
-          prof = skill[1] >= chaModifier;
-          break;
-        case "religion":
-          prof = skill[1] >= intModifier;
-          break;
-        case "sleightOfHand":
-          prof = skill[1] >= dexModifier;
-          break;
-        case "stealth":
-          prof = skill[1] >= dexModifier;
-          break;
-        case "survival":
-          prof = skill[1] >= wisModifier;
-          break;
+      case 'acrobatics':
+        prof = skill[1] >= dexModifier
+        break
+      case 'animalHandling':
+        prof = skill[1] >= wisModifier
+        break
+      case 'arcana':
+        prof = skill[1] >= intModifier
+        break
+      case 'athletics':
+        prof = skill[1] >= strModifier
+        break
+      case 'deception':
+        prof = skill[1] >= chaModifier
+        break
+      case 'history':
+        prof = skill[1] >= intModifier
+        break
+      case 'insight':
+        prof = skill[1] >= wisModifier
+        break
+      case 'intimidation':
+        prof = skill[1] >= chaModifier
+        break
+      case 'investigation':
+        prof = skill[1] >= intModifier
+        break
+      case 'medicine':
+        prof = skill[1] >= wisModifier
+        break
+      case 'nature':
+        prof = skill[1] >= intModifier
+        break
+      case 'perception':
+        prof = skill[1] >= wisModifier
+        break
+      case 'performance':
+        prof = skill[1] >= chaModifier
+        break
+      case 'persuasion':
+        prof = skill[1] >= chaModifier
+        break
+      case 'religion':
+        prof = skill[1] >= intModifier
+        break
+      case 'sleightOfHand':
+        prof = skill[1] >= dexModifier
+        break
+      case 'stealth':
+        prof = skill[1] >= dexModifier
+        break
+      case 'survival':
+        prof = skill[1] >= wisModifier
+        break
       }
 
-      let modifier = skill[1];
-      let s = skill[0];
+      const modifier = skill[1]
+      const s = skill[0]
 
-      if(s !== "id") {
+      if(s !== 'id') {
         mapSkill.push({
           proficiency: prof,
           modifier: modifier,
           skill: s,
-        });
+        })
       }
       // let bonus = modifier + (prof ? 2 : 0)
-    });
+    })
 
-    setMapSkill(mapSkill);
+    setMapSkill(mapSkill)
   }
 
   const strModifier =
     Math.floor((character?.strength - 10) / 2) >= 0
-      ? "+" + Math.floor((character?.strength - 10) / 2)
-      : Math.floor((character?.strength - 10) / 2);
+      ? '+' + Math.floor((character?.strength - 10) / 2)
+      : Math.floor((character?.strength - 10) / 2)
   const dexModifier =
     Math.floor((character?.dexterity - 10) / 2) >= 0
-      ? "+" + Math.floor((character?.dexterity - 10) / 2)
-      : Math.floor((character?.dexterity - 10) / 2);
+      ? '+' + Math.floor((character?.dexterity - 10) / 2)
+      : Math.floor((character?.dexterity - 10) / 2)
   const conModifier =
     Math.floor((character?.constitution - 10) / 2) >= 0
-      ? "+" + Math.floor((character?.constitution - 10) / 2)
-      : Math.floor((character?.constitution - 10) / 2);
+      ? '+' + Math.floor((character?.constitution - 10) / 2)
+      : Math.floor((character?.constitution - 10) / 2)
   const intModifier =
     Math.floor((character?.intelligence - 10) / 2) >= 0
-      ? "+" + Math.floor((character?.intelligence - 10) / 2)
-      : Math.floor((character?.intelligence - 10) / 2);
+      ? '+' + Math.floor((character?.intelligence - 10) / 2)
+      : Math.floor((character?.intelligence - 10) / 2)
   const wisModifier =
     Math.floor((character?.wisdom - 10) / 2) >= 0
-      ? "+" + Math.floor((character?.wisdom - 10) / 2)
-      : Math.floor((character?.wisdom - 10) / 2);
+      ? '+' + Math.floor((character?.wisdom - 10) / 2)
+      : Math.floor((character?.wisdom - 10) / 2)
   const chaModifier =
     Math.floor((character?.charisma - 10) / 2) >= 0
-      ? "+" + Math.floor((character?.charisma - 10) / 2)
-      : Math.floor((character?.charisma - 10) / 2);
+      ? '+' + Math.floor((character?.charisma - 10) / 2)
+      : Math.floor((character?.charisma - 10) / 2)
 
-  const maxLife = character?.life;
-  const [life, setLife] = useState(maxLife);
+  const maxLife = character?.life
+  const [life, setLife] = useState(maxLife)
 
   function onChangeLife(value: number[]) {
-    setLife(value[0]);
+    setLife(value[0])
   }
 
   function onAddLife() {
-    if (life < maxLife) setLife(life + 1);
+    if (life < maxLife) setLife(life + 1)
   }
 
   function onSubtractLife() {
-    if (life > 0) setLife(life - 1);
+    if (life > 0) setLife(life - 1)
   }
 
   function checkProficiency() {}
 
   return (
-   <div className={styles.container}>
+    <div className={styles.container}>
       <div className={styles.head}>
         <div className={styles.basicInfo}>
           <div
             style={{
-              background: "#d2d7f0",
-              borderRadius: "50%",
-              width: "125px",
-              height: "125px",
+              background: '#d2d7f0',
+              borderRadius: '50%',
+              width: '125px',
+              height: '125px',
             }}
           ></div>
           <h2>{character?.name}</h2>
@@ -165,11 +164,11 @@ export function Sheet() {
 
         <div className={styles.asideBasicInfo}>
           <div className={styles.life}>
-            <button onClick={onSubtractLife}>{"<"}</button>
+            <button onClick={onSubtractLife}>{'<'}</button>
             <p>
               {life}/{maxLife}
             </p>
-            <button onClick={onAddLife}>{">"}</button>
+            <button onClick={onAddLife}>{'>'}</button>
           </div>
 
           <form>
@@ -192,36 +191,36 @@ export function Sheet() {
           </form>
           <div className={styles.icon}>
             <div>
-              <Tooltip tooltip={"Armour Class"}>
+              <Tooltip tooltip={'Armour Class'}>
                 <img
-                  style={{ height: "32px" }}
+                  style={{ height: '32px' }}
                   src="/src/assets/icons/shield.svg"
                 />
               </Tooltip>
               {character?.armorClass}
             </div>
             <div>
-              <Tooltip tooltip={"Iniciative"}>
+              <Tooltip tooltip={'Iniciative'}>
                 <img
-                  style={{ height: "32px" }}
+                  style={{ height: '32px' }}
                   src="/src/assets/icons/group.svg"
                 />
               </Tooltip>
               +{character?.initiative}
             </div>
             <div>
-              <Tooltip tooltip={"Perception"}>
+              <Tooltip tooltip={'Perception'}>
                 <img
-                  style={{ height: "25px" }}
+                  style={{ height: '25px' }}
                   src="/src/assets/icons/eye.svg"
                 />
               </Tooltip>
               {10 + character?.skill?.perception}
             </div>
             <div>
-              <Tooltip tooltip={"Speed"}>
+              <Tooltip tooltip={'Speed'}>
                 <img
-                  style={{ height: "32px" }}
+                  style={{ height: '32px' }}
                   src="/src/assets/icons/speed.svg"
                 />
               </Tooltip>
@@ -319,7 +318,7 @@ export function Sheet() {
         </div>
 
         <div className={styles.throws}>
-          <div style={{ textAlign: "center" }}>
+          <div style={{ textAlign: 'center' }}>
             <h3>Death Saves</h3>
             <p>Sucess</p>
             <Checkbox.Root className={styles.checkboxThrows} id="c1">
@@ -380,7 +379,7 @@ export function Sheet() {
                     <td>
                       <Checkbox.Root
                         className={styles.CheckboxRoot}
-                        checked={skill["proficiency"]}
+                        checked={skill['proficiency']}
                         id="c1"
                       >
                         <Checkbox.Indicator
@@ -390,18 +389,18 @@ export function Sheet() {
                         </Checkbox.Indicator>
                       </Checkbox.Root>
                     </td>
-                    <td>{skill["modifier"]}</td>
-                    <td>{skill["skill"]}</td>
+                    <td>{skill['modifier']}</td>
+                    <td>{skill['skill']}</td>
                   </tr>
-                );
+                )
               })}
             </tbody>
           </table>
         </div>
         <div className={styles.details}>
-          <SheetTabs />
+          <CharacterSheetTabs />
         </div>
       </div>
     </div>
-  );
+  )
 }
