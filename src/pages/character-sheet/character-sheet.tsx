@@ -1,8 +1,9 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import styles from './character-sheet.module.scss'
 import { useEffect, useState } from 'react'
 import * as Slider from '@radix-ui/react-slider'
 import * as Checkbox from '@radix-ui/react-checkbox'
-import { Separator } from '../../components/Separator/Separator'
+import { Separator } from '../../components/separator/separator'
 import { CheckIcon } from '@radix-ui/react-icons'
 import { Tooltip } from '../../components/tooltip/tooltip'
 import { CharacterSheetTabs } from './components/character-sheet-tabs/character-sheet-tabs'
@@ -11,99 +12,9 @@ import { api } from '../../api/api'
 
 export function CharacterSheet() {
   const params = useParams()
-  const [character, setCharacter] = useState()
-  const [mapSkill, setMapSkill] = useState([])
-
-  async function getCharacter() {
-    const idCharacter: string = params.idCharacter!
-
-    await api.get(`/characters/${idCharacter}`).then((res) => {
-      setCharacter(res.data)
-      setLife(res.data.life)
-      buildSkills(res.data!.skill)
-    })
-  }
-
-  useEffect(() => {
-    getCharacter()
-  }, [])
-
-  function buildSkills(skills) {
-    const mapSkill: any[] = []
-    Object.entries(skills).map((skill: [string, unknown]) => {
-      let prof = false
-      switch (skill[0]) {
-      case 'acrobatics':
-        prof = skill[1] >= dexModifier
-        break
-      case 'animalHandling':
-        prof = skill[1] >= wisModifier
-        break
-      case 'arcana':
-        prof = skill[1] >= intModifier
-        break
-      case 'athletics':
-        prof = skill[1] >= strModifier
-        break
-      case 'deception':
-        prof = skill[1] >= chaModifier
-        break
-      case 'history':
-        prof = skill[1] >= intModifier
-        break
-      case 'insight':
-        prof = skill[1] >= wisModifier
-        break
-      case 'intimidation':
-        prof = skill[1] >= chaModifier
-        break
-      case 'investigation':
-        prof = skill[1] >= intModifier
-        break
-      case 'medicine':
-        prof = skill[1] >= wisModifier
-        break
-      case 'nature':
-        prof = skill[1] >= intModifier
-        break
-      case 'perception':
-        prof = skill[1] >= wisModifier
-        break
-      case 'performance':
-        prof = skill[1] >= chaModifier
-        break
-      case 'persuasion':
-        prof = skill[1] >= chaModifier
-        break
-      case 'religion':
-        prof = skill[1] >= intModifier
-        break
-      case 'sleightOfHand':
-        prof = skill[1] >= dexModifier
-        break
-      case 'stealth':
-        prof = skill[1] >= dexModifier
-        break
-      case 'survival':
-        prof = skill[1] >= wisModifier
-        break
-      }
-
-      const modifier = skill[1]
-      const s = skill[0]
-
-      if(s !== 'id') {
-        mapSkill.push({
-          proficiency: prof,
-          modifier: modifier,
-          skill: s,
-        })
-      }
-      // let bonus = modifier + (prof ? 2 : 0)
-    })
-
-    setMapSkill(mapSkill)
-  }
+  const [character, setCharacter] = useState<any>()
+  type SkillMap = { proficiency: boolean; modifier: number; skill: string }
+  const [mapSkill, setMapSkill] = useState<SkillMap[]>([])
 
   const strModifier =
     Math.floor((character?.strength - 10) / 2) >= 0
@@ -133,6 +44,100 @@ export function CharacterSheet() {
   const maxLife = character?.life
   const [life, setLife] = useState(maxLife)
 
+  useEffect(() => {
+    function getModifier(mod: string | number) {
+      if (typeof mod === 'string') {
+        return parseInt(mod.replace('+', ''), 10)
+      }
+      return mod
+    }
+
+    async function getCharacter() {
+      const idCharacter: string = params.idCharacter!
+
+      await api.get(`/characters/${idCharacter}`).then((res) => {
+        setCharacter(res.data)
+        setLife(res.data.life)
+        const skills = res.data!.skill
+        const mapSkill: SkillMap[] = []
+        Object.entries(skills).forEach((skill: [string, unknown]) => {
+          let prof = false
+          const skillValue = typeof skill[1] === 'number' ? skill[1] as number : 0
+          switch (skill[0]) {
+          case 'acrobatics':
+            prof = skillValue >= getModifier(dexModifier)
+            break
+          case 'animalHandling':
+            prof = skillValue >= getModifier(wisModifier)
+            break
+          case 'arcana':
+            prof = skillValue >= getModifier(intModifier)
+            break
+          case 'athletics':
+            prof = skillValue >= getModifier(strModifier)
+            break
+          case 'deception':
+            prof = skillValue >= getModifier(chaModifier)
+            break
+          case 'history':
+            prof = skillValue >= getModifier(intModifier)
+            break
+          case 'insight':
+            prof = skillValue >= getModifier(wisModifier)
+            break
+          case 'intimidation':
+            prof = skillValue >= getModifier(chaModifier)
+            break
+          case 'investigation':
+            prof = skillValue >= getModifier(intModifier)
+            break
+          case 'medicine':
+            prof = skillValue >= getModifier(wisModifier)
+            break
+          case 'nature':
+            prof = skillValue >= getModifier(intModifier)
+            break
+          case 'perception':
+            prof = skillValue >= getModifier(wisModifier)
+            break
+          case 'performance':
+            prof = skillValue >= getModifier(chaModifier)
+            break
+          case 'persuasion':
+            prof = skillValue >= getModifier(chaModifier)
+            break
+          case 'religion':
+            prof = skillValue >= getModifier(intModifier)
+            break
+          case 'sleightOfHand':
+            prof = skillValue >= getModifier(dexModifier)
+            break
+          case 'stealth':
+            prof = skillValue >= getModifier(dexModifier)
+            break
+          case 'survival':
+            prof = skillValue >= getModifier(wisModifier)
+            break
+          }
+
+          const modifier = skillValue
+          const s = skill[0]
+
+          if (s !== 'id') {
+            mapSkill.push({
+              proficiency: prof,
+              modifier: modifier,
+              skill: s,
+            })
+          }
+        })
+        setMapSkill(mapSkill)
+      })
+    }
+
+    getCharacter()
+  }, [chaModifier, dexModifier, intModifier, params.idCharacter, strModifier, wisModifier])
+
   function onChangeLife(value: number[]) {
     setLife(value[0])
   }
@@ -144,8 +149,6 @@ export function CharacterSheet() {
   function onSubtractLife() {
     if (life > 0) setLife(life - 1)
   }
-
-  function checkProficiency() {}
 
   return (
     <div className={styles.container}>
@@ -373,7 +376,7 @@ export function CharacterSheet() {
               </tr>
             </thead>
             <tbody>
-              {mapSkill.map((skill, index) => {
+              {mapSkill.map((skill) => {
                 return (
                   <tr>
                     <td>

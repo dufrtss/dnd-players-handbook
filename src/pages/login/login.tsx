@@ -1,67 +1,67 @@
-import { MouseEvent, useEffect, useState} from "react";
-import {api} from "../../api/api";
-import * as Form from "@radix-ui/react-form";
-import {useNavigate} from 'react-router-dom';
+import { MouseEvent, useEffect, useState} from 'react'
+import {api} from '../../api/api'
+import * as Form from '@radix-ui/react-form'
+import {useNavigate} from 'react-router-dom'
 
-import styles from "./Login.module.scss";
-import {PersonIcon} from "@radix-ui/react-icons";
+import styles from './Login.module.scss'
+import {PersonIcon} from '@radix-ui/react-icons'
 
 export function Login() {
-  const navigate = useNavigate();
-  const [loading, setLoading] = useState(false);
-  const [isNewAccount, setIsNewAccount] = useState(false);
+  const navigate = useNavigate()
+  const [loading, setLoading] = useState(false)
+  const [isNewAccount, setIsNewAccount] = useState(false)
   const [credentials, setCredentials] = useState({
-    username: "",
-    password: "",
-    email: ""
-  });
+    username: '',
+    password: '',
+    email: ''
+  })
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setCredentials({
       ...credentials,
       [e.target.name]: e.target.value,
-    });
-  };
+    })
+  }
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    setLoading(true);
-    e.preventDefault();
+    setLoading(true)
+    e.preventDefault()
     try {
-      const response = await api.post('/auth/sign-in', credentials);
-      const {token, refreshToken} = response.data;
-      localStorage.setItem('token', token);
-      localStorage.setItem('refreshToken', refreshToken);
+      const response = await api.post('/auth/sign-in', credentials)
+      const {token, refreshToken} = response.data
+      localStorage.setItem('token', token)
+      localStorage.setItem('refreshToken', refreshToken)
 
-      navigate('/');
+      navigate('/')
     } catch (error) {
-      console.log(error);
+      console.log(error)
     }
-    setLoading(false);
-  };
+    setLoading(false)
+  }
 
   const createNewAccount = async (e: MouseEvent<HTMLButtonElement, MouseEvent>) => {
-    e.preventDefault();
-    setLoading(true);
+    e.preventDefault()
+    setLoading(true)
 
     const parameters = {
       ...credentials,
-      role: ["user"]
+      role: ['user']
     }
     
-    const response = await api.post('auth/sign-up', parameters);
+    const response = await api.post('auth/sign-up', parameters)
 
     alert(response.data.message)
     
     setIsNewAccount(false)
-    setLoading(false);
-  };
+    setLoading(false)
+  }
 
   useEffect(() => {
-    document.body.className = "loginBackground";
+    document.body.className = 'loginBackground'
     return () => {
-      document.body.className = "defaultBackground";
-    };
-  }, []);
+      document.body.className = 'defaultBackground'
+    }
+  }, [])
 
   return (
     <div className={styles.container}>
@@ -74,9 +74,9 @@ export function Login() {
           <Form.Field className={styles.formField} name="email">
             <div
               style={{
-                display: "flex",
-                alignItems: "baseline",
-                justifyContent: "space-between",
+                display: 'flex',
+                alignItems: 'baseline',
+                justifyContent: 'space-between',
               }}
             >
               <Form.Label>Username</Form.Label>
@@ -142,7 +142,7 @@ export function Login() {
           { isNewAccount === false &&
             <Form.Submit asChild>
               <button disabled={loading} type="submit">
-                {loading ? "Loading..." : "Login"}
+                {loading ? 'Loading...' : 'Login'}
               </button>
             </Form.Submit>
           }
@@ -167,5 +167,5 @@ export function Login() {
         </Form.Root>
       </div>
     </div>
-  );
+  )
 }

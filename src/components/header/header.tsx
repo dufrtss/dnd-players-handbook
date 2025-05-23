@@ -1,12 +1,12 @@
-import styles from "./Header.module.scss";
-import { Link } from "react-router-dom";
+import styles from './Header.module.scss'
+import { Link } from 'react-router-dom'
 
 export function Header() {
   return (
     <header className={styles.headerStyle}>
       <div>
         <Link to="/">
-          <img style={{ width: "5rem" }} src="/src/assets/imgs/logo2.png" />
+          <img style={{ width: '5rem' }} src="/src/assets/imgs/logo2.png" />
         </Link>
       </div>
       <div>
@@ -20,5 +20,5 @@ export function Header() {
         </Link> */}
       </div>
     </header>
-  );
+  )
 }

@@ -1,13 +1,13 @@
-import { PersonIcon } from "@radix-ui/react-icons";
-import styles from "./Profile.module.scss";
-import * as Form from "@radix-ui/react-form";
-import { useState } from "react";
+import { PersonIcon } from '@radix-ui/react-icons'
+import styles from './Profile.module.scss'
+import * as Form from '@radix-ui/react-form'
+import { useState } from 'react'
 
 export function Profile() {
-  const [edit, setEdit] = useState(false);
+  const [edit, setEdit] = useState(false)
 
   function handleSetEdit() {
-    setEdit(!edit);
+    setEdit(!edit)
   }
 
   return (
@@ -22,9 +22,9 @@ export function Profile() {
             <Form.Field name="name">
               <div
                 style={{
-                  display: "flex",
-                  alignItems: "baseline",
-                  justifyContent: "space-between",
+                  display: 'flex',
+                  alignItems: 'baseline',
+                  justifyContent: 'space-between',
                 }}
               >
                 <Form.Label>Name</Form.Label>
@@ -45,9 +45,9 @@ export function Profile() {
             <Form.Field name="email">
               <div
                 style={{
-                  display: "flex",
-                  alignItems: "baseline",
-                  justifyContent: "space-between",
+                  display: 'flex',
+                  alignItems: 'baseline',
+                  justifyContent: 'space-between',
                 }}
               >
                 <Form.Label>E-mail</Form.Label>
@@ -94,11 +94,11 @@ export function Profile() {
 
           <Form.Submit asChild>
             <button onClick={handleSetEdit}>
-              {edit ? "Salvar" : "Editar"}
+              {edit ? 'Salvar' : 'Editar'}
             </button>
           </Form.Submit>
         </Form.Root>
       </div>
     </div>
-  );
+  )
 }

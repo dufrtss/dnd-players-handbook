@@ -1,8 +1,8 @@
-import { Cross2Icon } from "@radix-ui/react-icons";
-import styles from "./Modal.module.scss";
-import { useState } from "react";
-import * as Dialog from "@radix-ui/react-dialog";
-import { api } from "../../api/api";
+import { Cross2Icon } from '@radix-ui/react-icons'
+import styles from './Modal.module.scss'
+import { useState } from 'react'
+import * as Dialog from '@radix-ui/react-dialog'
+import { api } from '../../api/api'
 
 export function Modal({
   getInventory,
@@ -12,25 +12,25 @@ export function Modal({
   inventoryId: number | undefined;
 }) {
   const [form, setForm] = useState({
-    name: "",
-  });
+    name: '',
+  })
 
   async function saveItem() {
     await api
       .post(`/inventories/${inventoryId}/add-item`, form.name, {
-        headers: { "Content-Type": "text/plain" },
+        headers: { 'Content-Type': 'text/plain' },
       })
       .then(() => {
-        getInventory();
-      });
+        getInventory()
+      })
   }
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setForm({
       ...form,
       [e.target.name]: e.target.value,
-    });
-  };
+    })
+  }
 
   return (
     <Dialog.Portal>
@@ -67,5 +67,5 @@ export function Modal({
         </Dialog.Close>
       </Dialog.Content>
     </Dialog.Portal>
-  );
+  )
 }

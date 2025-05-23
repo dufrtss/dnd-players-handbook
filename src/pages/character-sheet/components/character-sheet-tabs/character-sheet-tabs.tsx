@@ -1,19 +1,17 @@
 import styles from './SheetTabs.module.scss'
 import * as Tabs from '@radix-ui/react-tabs'
 import * as Accordion from '@radix-ui/react-accordion'
-import * as RadixHoverCard from '@radix-ui/react-hover-card'
-import { AccordionItem } from '../../../../components/AccordionItem/AccordionItem'
-import { HoverCard } from '../../../../components/HoverCard/HoverCard'
 import * as Dialog from '@radix-ui/react-dialog'
-import { Modal } from '../../../../components/Modal/Modal'
+import { Modal } from '../../../../components/modal/modal'
 import { useParams } from 'react-router'
 import { api } from '../../../../api/api'
-import { useEffect, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
+import { AccordionItem } from '../accordion-item/accordion-item'
 
 type Item = {
   id: number;
   armorClass: number;
-  armorType: any;
+  armorType: string;
   damage: string;
   name: string;
   properties: string[];
@@ -31,11 +29,7 @@ export function CharacterSheetTabs() {
   const [inventoryId, setInventoryId] = useState<number>()
   const [loading, setLoading] = useState(false)
 
-  useEffect(() => {
-    getInventory()
-  }, [])
-
-  async function getInventory() {
+  const getInventory = useCallback(async () => {
     setLoading(true)
     await api.get(`inventories/character/${idCharacter}`).then((res) => {
       const data = res?.data?.items
@@ -44,7 +38,11 @@ export function CharacterSheetTabs() {
       setInventoryId(inventoryId)
     })
     setLoading(false)
-  }
+  }, [idCharacter])
+
+  useEffect(() => {
+    getInventory()
+  }, [getInventory])
 
   async function onDeleteItem(item: number) {
     await api.delete(`items/${item}`).then(() => getInventory())

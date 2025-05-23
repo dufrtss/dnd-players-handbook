@@ -1,6 +1,6 @@
-import styles from "./Root.module.scss";
-import { Header } from "../../components/Header/Header";
-import { Link, Outlet } from "react-router-dom";
+import styles from './Root.module.scss'
+import { Header } from '../../components/header/header'
+import { Link, Outlet } from 'react-router-dom'
 
 export function Root() {
   return (
@@ -13,5 +13,5 @@ export function Root() {
       </Link>
       <Outlet />
     </>
-  );
+  )
 }

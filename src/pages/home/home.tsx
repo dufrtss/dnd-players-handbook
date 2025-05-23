@@ -1,9 +1,10 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Link } from 'react-router-dom'
 import styles from './Home.module.scss'
 import { Tooltip } from '../../components/tooltip/tooltip'
 import { api } from '../../api/api'
 import { useNavigate } from 'react-router-dom'
-import { useEffect, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 
 export function Home() {
   const [characterList, setCharacterList] = useState([])
@@ -22,7 +23,7 @@ export function Home() {
     setLoading(false)
   }
 
-  async function getCharactersList() {
+  const getCharactersList = useCallback(async () => {
     setListLoading(true)
     await api
       .get('characters/user', { params: { page: page, size: 12 } })
@@ -31,7 +32,7 @@ export function Home() {
         setCharacterList(res.data.content)
       })
     setListLoading(false)
-  }
+  }, [page])
 
   async function handleNextPage() {
     if (page < maxPages + 1) {
@@ -49,7 +50,7 @@ export function Home() {
 
   useEffect(() => {
     getCharactersList()
-  }, [page])
+  }, [getCharactersList, page])
 
   return (
     <div className={styles.container}>
@@ -66,7 +67,7 @@ export function Home() {
       {!listLoading && (
         <>
           <div className={styles.cardList}>
-            {characterList.map((item) => (
+            {characterList.map((item: any) => (
               <div key={item.id} className={styles.card}>
                 <div className={styles.img}></div>
                 <div>

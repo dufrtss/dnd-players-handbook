@@ -1,7 +1,6 @@
-import * as Separator from '@radix-ui/react-separator'
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import * as ScrollArea from '@radix-ui/react-scroll-area'
 import styles from './CharacterInfo.module.scss'
-import { useParams } from 'react-router-dom'
 import { useEffect, useState } from 'react'
 import { api } from '../../api/api'
 import { useNavigate } from 'react-router-dom'
@@ -12,7 +11,7 @@ type InfoProps = {
 
 export default function CharacterInfo({characterSaved}: InfoProps) {
   const navigate = useNavigate()
-  const [character, setCharacter] = useState()
+  const [character, setCharacter] = useState<any>()
   const [characterName, setCharacterName] = useState()
   const [attributes] = useState({
     strength: 0,
@@ -33,7 +32,7 @@ export default function CharacterInfo({characterSaved}: InfoProps) {
 
   useEffect(() => {
     setCharacter(characterSaved)
-  }, [])
+  }, [characterSaved])
 
 
   async function saveFinalStep() {
@@ -45,35 +44,32 @@ export default function CharacterInfo({characterSaved}: InfoProps) {
 
   }
 
-  function handleStrChange(event) {
-    attributes.strength = event.target.value
-  }
-  function handleDexChange(event) {
-    attributes.dexterity = event.target.value
-  }
-  function handleConChange(event) {
-    attributes.constitution = event.target.value
-  }
-  function handleIntChange(event) {
-    attributes.intelligence = event.target.value
-  }
-  function handleWisChange(event) {
-    attributes.wisdom = event.target.value
-  }
-  function handleChaChange(event) {
-    attributes.charisma = event.target.value
+  function handleAttributeChange(attributeType: string, event: any) {
+    if (attributeType === 'str') {
+      attributes.strength = event.target.value
+    } else if (attributeType === 'dex') {
+      attributes.dexterity = event.target.value 
+    } else if (attributeType === 'con') {
+      attributes.constitution = event.target.value
+    } else if (attributeType === 'int') {
+      attributes.intelligence = event.target.value
+    } else if (attributeType === 'wis') {
+      attributes.wisdom = event.target.value
+    } else if (attributeType === 'cha') {
+      attributes.charisma = event.target.value
+    }
   }
 
-  function handleNameChange(event) {
+  function handleNameChange(event: any) {
     setCharacterName(event.target.value)
   }
 
-  async function handleSubmit(event) {
+  async function handleSubmit(event: any) {
     event.preventDefault()
     await saveFinalStep()
   }
 
-  return(
+  return (
     <ScrollArea.Root className="ScrollAreaRoot">
       <ScrollArea.Viewport className="ScrollAreaViewport">
         <div className={styles.characterInfoContainer} >
@@ -97,49 +93,50 @@ export default function CharacterInfo({characterSaved}: InfoProps) {
               <div className={styles.attributes}>
                 <div>STR</div>
                 <div>{strModifier}</div>
-                <input type="text" placeholder='0' onChange={handleStrChange}/>
+                <input type="text" placeholder='0' onChange={(event) => handleAttributeChange('str', event)} />
               </div>
               <div className={styles.attributes}>
                 <div>DEX</div>
                 <div>{dexModifier}</div>
-                <input type="text" placeholder='0' onChange={handleDexChange}/>
+                <input type="text" placeholder='0' onChange={(event) => handleAttributeChange('dex', event)} />
               </div>
               <div className={styles.attributes}>
                 <div>CON</div>
                 <div>{conModifier}</div>
-                <input type="text" placeholder='0' onChange={handleConChange}/>
+                <input type="text" placeholder='0' onChange={(event) => handleAttributeChange('con', event)} />
               </div>
               <div className={styles.attributes}>
                 <div>INT</div>
                 <div>{intModifier}</div>
-                <input type="text" placeholder='0' onChange={handleIntChange}/>
+                <input type="text" placeholder='0' onChange={(event) => handleAttributeChange('int', event)} />
               </div>
               <div className={styles.attributes}>
                 <div>WIS</div>
                 <div>{wisModifier}</div>
-                <input type="text" placeholder='0' onChange={handleWisChange}/>
+                <input type="text" placeholder='0' onChange={(event) => handleAttributeChange('wis', event)} />
               </div>
               <div className={styles.attributes}>
                 <div>CHA</div>
                 <div>{chaModifier}</div>
-                <input type="text" placeholder='0' onChange={handleChaChange}/>
+                <input type="text" placeholder='0' onChange={(event) => handleAttributeChange('cha', event)} />
               </div>
             </div>
             <div style={{display:'flex', alignItems: 'center', justifyContent: 'center'}}>
               <button className={styles.saveAtributesButton}>Save</button>
             </div>
           </form>
-
         </div>
       </ScrollArea.Viewport>
+
       <ScrollArea.Scrollbar className="ScrollAreaScrollbar" orientation="vertical">
         <ScrollArea.Thumb className="ScrollAreaThumb"/>
       </ScrollArea.Scrollbar>
+
       <ScrollArea.Scrollbar className="ScrollAreaScrollbar" orientation="horizontal">
         <ScrollArea.Thumb className="ScrollAreaThumb"/>
       </ScrollArea.Scrollbar>
+
       <ScrollArea.Corner className="ScrollAreaCorner" />
     </ScrollArea.Root>
-        
   )
 }

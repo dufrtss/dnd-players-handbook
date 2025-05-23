@@ -1,6 +1,6 @@
-import { ReactNode } from "react";
-import styles from "./HoverCard.module.scss";
-import * as RadixHoverCard from "@radix-ui/react-hover-card";
+import { ReactNode } from 'react'
+import styles from './HoverCard.module.scss'
+import * as RadixHoverCard from '@radix-ui/react-hover-card'
 
 type HoverCard = {
   children: ReactNode;
@@ -14,5 +14,5 @@ export function HoverCard({ children }: HoverCard) {
         {children}
       </RadixHoverCard.Content>
     </RadixHoverCard.Portal>
-  );
+  )
 }

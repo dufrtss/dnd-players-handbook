@@ -1,11 +1,11 @@
-import styles from "./SixthStep.module.scss";
+import styles from './SixthStep.module.scss'
 
 export default function SixthStep() {
-  const decisionA: string[] = ["greataxe", "any martial melee weapon"];
-  const decisionB: string[] = ["two handaxes", "any simple weapon"];
-  const decisionC: string[] = ["An explorer’s pack and four javelins"];
-  const decisionD: string[] = [];
-  const decisionE: string[] = [];
+  const decisionA: string[] = ['greataxe', 'any martial melee weapon']
+  const decisionB: string[] = ['two handaxes', 'any simple weapon']
+  const decisionC: string[] = ['An explorer’s pack and four javelins']
+  const decisionD: string[] = []
+  const decisionE: string[] = []
 
   return (
     <div className={styles.fifthContainer}>
@@ -54,5 +54,5 @@ export default function SixthStep() {
         </div>
       )}
     </div>
-  );
+  )
 }
