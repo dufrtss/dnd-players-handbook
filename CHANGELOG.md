@@ -2,6 +2,7 @@
 
 ## 22-05-2025
 
+- Correções de linting utilizando ESLint com as novas configurações.
 - Atualizado vite de versão 4.4.5 para versão 6.3.5.
 - Arquivos renomeados para padrão kebab-case.
 - Estrutura de pastas/arquivos organizada.
