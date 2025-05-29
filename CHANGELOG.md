@@ -1,5 +1,9 @@
 # Changelog
 
+## 29-05-2025
+
+- Adicionado interface fluente para lidar com retorno de requsições na API.
+
 ## 22-05-2025
 
 - Correções de linting utilizando ESLint com as novas configurações.
