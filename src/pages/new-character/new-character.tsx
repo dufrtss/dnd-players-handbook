@@ -1,4 +1,5 @@
-import { useEffect, useState } from 'react'
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import { SetStateAction, useEffect, useState } from 'react'
 import * as Progress from '@radix-ui/react-progress'
 import styles from './NewCharacter.module.scss'
 import SecondStep from '../../components/steps/second-step/second-step'
@@ -38,6 +39,25 @@ export function NewCharacter() {
     return await api.get(`/characters/${idCharacter}`)
   }
 
+  function fluentApi(promise: Promise<any>) {
+    const api = {
+      then: (callback: any) => {
+        promise = promise.then(callback)
+        return api
+      },
+      catch: (callback: any) => {
+        promise = promise.catch(callback)
+        return api
+      }
+    }
+    return api
+  }
+
+  function updateCharacter(response: { data: SetStateAction<object | undefined>; }) {
+    setCharacter(response.data)
+    setIsLoading(false)
+  }
+
   useEffect(() => {
     const idCharacter: string = params.idCharacter!
 
@@ -50,19 +70,19 @@ export function NewCharacter() {
   async function handleNextStep() {
     switch (step) {
     case 1:
-      await saveRace()
+      saveRace()
       break
     case 2:
-      await saveClass()
+      saveClass()
       break
     case 3:
-      await saveBackground()
+      saveBackground()
       break
     case 4:
-      await saveSelectedProficiencies()
+      saveSelectedProficiencies()
       break
     case 5:
-      await saveSelectedLanguages()
+      saveSelectedLanguages()
       break
     }
     if (step < 6) {
@@ -77,81 +97,56 @@ export function NewCharacter() {
     setSelectedLanguages(languages)
   }
 
-  async function saveSelectedLanguages() {
-    if(!isLoading){
-      await api.post(`/characters/${params.idCharacter}/language`,
-        selectedLanguages
-      ).then((response) => {
-        setCharacter(response.data)
-        setIsLoading(false)
-      })
+  function saveSelectedLanguages() {
+    if (!isLoading) {
+      setIsLoading(true)
+      return fluentApi(api.post(`/characters/${params.idCharacter}/language`, selectedLanguages))
+        .then(updateCharacter)
     }
-
-    setIsLoading(true)
   }
 
   const changeSelectedProficiencies = async (proficiencies: string[]) => {
     setSelectedProficiencies(proficiencies)
   }
 
-  async function saveSelectedProficiencies () {
-    if(!isLoading){
-      await api.post(`/characters/${params.idCharacter}/skill`,
-        selectedProficiencies
-      ).then((response) => {
-        setCharacter(response.data)
-        setIsLoading(false)
-      })
+  function saveSelectedProficiencies() {
+    if (!isLoading) {
+      setIsLoading(true)
+      return fluentApi(api.post(`/characters/${params.idCharacter}/skill`, selectedProficiencies))
+        .then(updateCharacter)
     }
-
-    setIsLoading(true)
   }
 
   const changeSelectedRace = async (race: string) => {
     setSelectedRace(race)
   }
 
-  async function saveRace() {
-    if(!isLoading){
-      await api.post(`/characters/${params.idCharacter}/race`, {
-        raceType: selectedRace
-      }).then((response) => {
-        setCharacter(response.data)
-        setIsLoading(false)
-      })
+  function saveRace() {
+    if (!isLoading) {
+      setIsLoading(true)
+      return fluentApi(api.post(`/characters/${params.idCharacter}/race`, { raceType: selectedRace }))
+        .then(updateCharacter)
     }
-
-    setIsLoading(true)
   }
 
-  async function saveClass() {
-    if(!isLoading){
-      await api.post(`/characters/${params.idCharacter}/class`, {
-        classType: selectedClass
-      }).then((response) => {
-        setCharacter(response.data)
-        setIsLoading(false)
-      })
+  function saveClass() {
+    if (!isLoading) {
+      setIsLoading(true)
+      return fluentApi(api.post(`/characters/${params.idCharacter}/class`, { classType: selectedClass }))
+        .then(updateCharacter)
     }
-
-    setIsLoading(true)
   }
 
   const changeSelectClass = async (characterClass: string) => {
     setSelectedClass(characterClass)
   }
 
-  async function saveBackground() {
-    if(!isLoading){
-      await api.post(`/characters/${params.idCharacter}/background`, {
-        backgroundType: selectedBackground
-      }).then((response) => {
-        setCharacter(response.data)
-        setIsLoading(false)
-      })
+  function saveBackground() {
+    if (!isLoading) {
+      setIsLoading(true)
+      return fluentApi(api.post(`/characters/${params.idCharacter}/background`, { backgroundType: selectedBackground }))
+        .then(updateCharacter)
     }
-
-    setIsLoading(true)
   }
 
   const changeSelectedBackground = async (background: string) => {
