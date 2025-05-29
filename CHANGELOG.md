@@ -2,6 +2,7 @@
 
 ## 29-05-2025
 
+- Adicionado dependência Vitest para criação e execução dos testes.
 - Adicionado interface fluente para lidar com retorno de requsições na API.
 
 ## 22-05-2025
