@@ -1,5 +1,5 @@
 import { PersonIcon } from '@radix-ui/react-icons'
-import styles from './Profile.module.scss'
+import styles from './profile.module.scss'
 import * as Form from '@radix-ui/react-form'
 import { useState } from 'react'
 

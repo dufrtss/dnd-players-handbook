@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import * as ScrollArea from '@radix-ui/react-scroll-area'
-import styles from './CharacterInfo.module.scss'
+import styles from './character-info.module.scss'
 import { useEffect, useState } from 'react'
 import { api } from '../../api/api'
 import { useNavigate } from 'react-router-dom'

@@ -1,11 +1,11 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { SetStateAction, useEffect, useState } from 'react'
 import * as Progress from '@radix-ui/react-progress'
-import styles from './NewCharacter.module.scss'
+import styles from './new-character.module.scss'
 import SecondStep from '../../components/steps/second-step/second-step'
 import FirstStep from '../../components/steps/first-step/first-step'
 import CharacterInfo from '../../components/character-info/character-info'
-import ThirdStep from '../../components/steps/third-step/ThirdStep'
+import ThirdStep from '../../components/steps/third-step/third-step'
 import FifthStep from '../../components/steps/fifth-step/fifth-step'
 import FourthStep from '../../components/steps/fourth-step/fourth-step'
 import { api } from '../../api/api'

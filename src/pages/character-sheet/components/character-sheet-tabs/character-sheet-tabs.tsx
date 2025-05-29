@@ -1,4 +1,4 @@
-import styles from './SheetTabs.module.scss'
+import styles from './character-sheet-tabs.module.scss'
 import * as Tabs from '@radix-ui/react-tabs'
 import * as Accordion from '@radix-ui/react-accordion'
 import * as Dialog from '@radix-ui/react-dialog'

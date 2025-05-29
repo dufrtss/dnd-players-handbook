@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import styles from './SecondStep.module.scss'
+import styles from './second-step.module.scss'
 import * as Separator from '@radix-ui/react-separator'
 
 type SecondStepProps = {

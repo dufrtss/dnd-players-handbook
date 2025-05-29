@@ -1,7 +1,7 @@
 import { ReactNode } from 'react'
 
 import * as RadixTooltip from '@radix-ui/react-tooltip'
-import styles from './Tooltip.module.scss'
+import styles from './tooltip.module.scss'
 
 type TooltipType = {
     tooltip: string;

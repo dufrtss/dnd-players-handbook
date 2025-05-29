@@ -1,4 +1,4 @@
-import styles from './SixthStep.module.scss'
+import styles from './sixth-step.module.scss'
 
 export default function SixthStep() {
   const decisionA: string[] = ['greataxe', 'any martial melee weapon']

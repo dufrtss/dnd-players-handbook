@@ -1,5 +1,5 @@
 import { ReactNode } from 'react'
-import styles from './HoverCard.module.scss'
+import styles from './hover-card.module.scss'
 import * as RadixHoverCard from '@radix-ui/react-hover-card'
 
 type HoverCard = {

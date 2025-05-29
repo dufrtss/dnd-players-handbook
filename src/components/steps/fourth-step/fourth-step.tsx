@@ -1,4 +1,4 @@
-import styles from './FourthStep.module.scss'
+import styles from './fourth-step.module.scss'
 import {useState} from 'react'
 
 type FourthStepProps = {

@@ -1,4 +1,4 @@
-import styles from './FifthStep.module.scss'
+import styles from './fifth-step.module.scss'
 import {useState} from 'react'
 
 

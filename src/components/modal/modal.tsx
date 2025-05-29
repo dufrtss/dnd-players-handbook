@@ -1,5 +1,5 @@
 import { Cross2Icon } from '@radix-ui/react-icons'
-import styles from './Modal.module.scss'
+import styles from './modal.module.scss'
 import { useState } from 'react'
 import * as Dialog from '@radix-ui/react-dialog'
 import { api } from '../../api/api'

@@ -3,7 +3,7 @@ import {api} from '../../api/api'
 import * as Form from '@radix-ui/react-form'
 import {useNavigate} from 'react-router-dom'
 
-import styles from './Login.module.scss'
+import styles from './login.module.scss'
 import {PersonIcon} from '@radix-ui/react-icons'
 
 export function Login() {

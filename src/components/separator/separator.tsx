@@ -1,5 +1,5 @@
 import * as RadixSeparator from '@radix-ui/react-separator'
-import styles from './Separator.module.scss'
+import styles from './separator.module.scss'
 
 type TooltipType = {
   orientation: 'horizontal' | 'vertical';

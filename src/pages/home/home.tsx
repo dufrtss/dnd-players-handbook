@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { Link } from 'react-router-dom'
-import styles from './Home.module.scss'
+import styles from './home.module.scss'
 import { Tooltip } from '../../components/tooltip/tooltip'
 import { api } from '../../api/api'
 import { useNavigate } from 'react-router-dom'
