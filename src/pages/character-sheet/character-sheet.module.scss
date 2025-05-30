@@ -1,23 +1,16 @@
-@import "../../design-tokens/_scss-variables.scss";
-
 .container {
-  background: $color-base;
   display: flex;
   flex-direction: column;
-  padding: $spacer-xxl;
 
-  gap: $spacer-xl;
 
   width: 100%;
   min-height: 50vh;
-  border-radius: $spacer-m;
   margin-bottom: 5rem;
 }
 
 .head {
   display: flex;
   justify-content: center;
-  gap: $spacer-xl;
 }
 
 .basicInfo {
@@ -57,7 +50,6 @@
     justify-content: flex-end;
     gap: 8px;
 
-    padding: $spacer-m;
     height: 90px;
     width: 65px;
     border-radius: 8px;
@@ -65,7 +57,6 @@
 }
 
 .asideBasicInfo {
-  padding: $spacer-m;
 }
 
 .characterInfo {
@@ -81,11 +72,8 @@
     align-items: center;
     justify-content: center;
 
-    padding: $spacer-s;
-    margin: $spacer-s;
 
     font-weight: bold;
-    background-color: $color-base-lighter;
 
     border-radius: 8px;
   }
@@ -101,7 +89,6 @@
 
     &:hover {
       cursor: pointer;
-      color: $color-primary;
     }
   }
 }
@@ -117,7 +104,6 @@
 }
 
 .SliderTrack {
-  background-color: $color-base-transparent;
   position: relative;
   flex-grow: 1;
   border-radius: 9999px;
@@ -126,7 +112,6 @@
 
 .SliderRange {
   position: absolute;
-  background-color: $color-warning;
   border-radius: 9999px;
   height: 100%;
 }
@@ -135,17 +120,14 @@
   display: block;
   width: 14px;
   height: 14px;
-  background-color: $color-warning;
   border-radius: 10px;
 
   &:hover {
-    background-color: $color-warning;
   }
 }
 
 .SliderThumb:focus {
   outline: none;
-  box-shadow: 0 0 0 2px $color-warning;
 }
 
 .content {
@@ -161,9 +143,7 @@
   flex: 1;
   text-align: center;
   padding: 0.875rem;
-  background: $color-base-lighter;
 
-  border: 2px solid $color-content-transparent;
   border-radius: 5px;
 
   h3 {
@@ -210,8 +190,6 @@
     flex-direction: column;
     align-items: center;
 
-    background: $color-base-lighter;
-    border: 2px solid $color-base-lighter;
     border-radius: 8px;
 
     h2 {
@@ -226,9 +204,7 @@
     p:last-child {
       font-size: 1.2rem;
       font-weight: 100;
-      color: $color-content;
 
-      background: $color-base;
       border-radius: 0 0 8px 8px;
       padding: 4px 0;
       width: 100%;
@@ -241,11 +217,9 @@
   display: flex;
   justify-content: space-around;
 
-  border: 1px solid $color-content;
   border-radius: 5px;
 
   padding: 0.875rem;
-  background: $color-base-lighter;
 
   h3 {
     text-align: center;
@@ -260,7 +234,6 @@
   }
 
   .hitDice {
-    color: $color-warning;
     font-size: 1.5rem;
   }
 
@@ -269,12 +242,9 @@
     width: 18px;
     height: 18px;
     border-radius: 50%;
-    box-shadow: 0 0 0 1.5px $color-content-transparent;
     margin: 3px;
 
     &:hover {
-      box-shadow: 0 0 0 2px $color-primary;
-      background-color: $color-base-transparent;
     }
   }
 
@@ -287,11 +257,9 @@
 
 .skills {
   flex: 1;
-  border: 1px solid $color-content;
   border-radius: 5px;
 
   padding: 0.875rem;
-  background: $color-base-lighter;
 
   table {
     width: 100%;
@@ -305,7 +273,6 @@
   tr {
     text-align: left;
     &:hover {
-      background-color: $color-base;
     }
   }
 }
@@ -315,12 +282,9 @@
   width: 18px;
   height: 18px;
   border-radius: 50%;
-  box-shadow: 0 0 0 1px $color-content-transparent;
   margin-top: 6px;
 
   &:hover {
-    box-shadow: 0 0 0 2px $color-primary;
-    background-color: $color-base-transparent;
   }
 }
 
@@ -333,7 +297,6 @@
 .details {
   flex: 3;
 
-  border: 1px solid $color-content;
   border-radius: 5px;
 }
 

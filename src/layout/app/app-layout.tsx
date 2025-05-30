@@ -1,4 +1,4 @@
-import styles from './Root.module.scss'
+import styles from './app-layout.module.scss'
 import { Header } from '../../components/header/header'
 import { Link, Outlet } from 'react-router-dom'
 
