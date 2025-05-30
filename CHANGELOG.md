@@ -2,8 +2,6 @@
 
 ## 29-05-2025
 
-- Removido Design Tokens por incompatibilidade da versão.
-- Trocado Vitest por Cypress para criação dos testes.
 - Adicionado dependência Vitest para criação e execução dos testes.
 - Adicionado interface fluente para lidar com retorno de requsições na API.
 
