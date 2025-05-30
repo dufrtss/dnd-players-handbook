@@ -1,6 +1,11 @@
+@import "../../design-tokens/scss-variables";
+
 .hoverCardContent {
     border-radius: 4px;
+    padding: $spacer-m;
     width: 300px;
+    color: $color-base;
+    background-color: $color-content;
 
     box-shadow: hsl(206 22% 7% / 35%) 0px 10px 38px -10px, hsl(206 22% 7% / 20%) 0px 10px 20px -15px;
     animation-duration: 400ms;
@@ -21,6 +26,7 @@
   }
   
   .hoverCardArrow {
+    fill: $color-content;
   }
   
   @keyframes slideUpAndFade {

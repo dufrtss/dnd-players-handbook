@@ -1,3 +1,5 @@
+@import "../../design-tokens/_scss-variables.scss";
+
 .SeparatorRoot {
     background-color: white;
   }
@@ -147,6 +149,7 @@
 }
 
 .saveAtributesButton {
+    background-color: $color-base-lighter;
     padding: 10px;
     border-radius: 5px;
     font-weight: bold;

@@ -1,8 +1,9 @@
-.logo {
-  margin: 2rem;
-  text-align: center;
-}
+@import "../../design-tokens/scss-variables";
 
-.logo + img {
-  width: 15rem
+.logo {
+  margin: $spacer-xl;
+  text-align: center;
+  img {
+    width: 15rem;
+  }
 }

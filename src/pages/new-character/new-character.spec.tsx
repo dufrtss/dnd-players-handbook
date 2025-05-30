@@ -1,9 +1,8 @@
 import { describe, it, expect, vi } from 'vitest'
-import { fireEvent, render, screen } from '@testing-library/react'
-import 'vitest-dom'
+import { render, screen, fireEvent } from '@testing-library/react'
 import { NewCharacter } from './new-character'
 import { api } from '../../api/api'
-import { MemoryRouter } from 'react-router-dom'
+
 // Mock dependencies
 vi.mock('../../api/api', () => ({
   api: {
@@ -14,48 +13,35 @@ vi.mock('../../api/api', () => ({
 
 describe('NewCharacter Component', () => {
   it('renders without crashing', () => {
-    render(
-      <MemoryRouter>
-        <NewCharacter />
-      </MemoryRouter>
-    )
-    expect(screen.queryByAltText('Left icon')).toBeInTheDocument()
+    render(<NewCharacter />)
+    expect(screen.getByText(/Left icon/)).toBeDefined()
   })
 
   it('progresses through steps correctly', async () => {
-    render(
-      <MemoryRouter>
-        <NewCharacter />
-      </MemoryRouter>
-    )
+    render(<NewCharacter />)
 
-    const rightArrows = screen.getAllByAltText('Right icon')
-    const rightArrow = rightArrows[0]
+    const rightArrow = screen.getByAltText('Right icon')
     
+    // Click through steps
     for (let i = 0; i < 5; i++) {
       fireEvent.click(rightArrow)
       expect(vi.mocked(api.post)).toHaveBeenCalled()
     }
 
-    expect(screen.queryByText((content) => content.includes('Character Info'))).toBeInTheDocument()
+    // Verify the character info is shown in the last step
+    expect(screen.getByText(/Character Info/)).toBeDefined()
   })
 
   it('allows navigating backward through steps', async () => {
-    render(
-      <MemoryRouter>
-        <NewCharacter />
-      </MemoryRouter>
-    )
+    render(<NewCharacter />)
 
-    const rightArrows = screen.getAllByAltText('Right icon')
-    const rightArrow = rightArrows[0] 
-    fireEvent.click(rightArrow)
+    const rightArrow = screen.getByAltText('Right icon')
+    fireEvent.click(rightArrow) // Move to Step 2
 
-    const leftArrows = screen.getAllByAltText('Left icon')
-    const leftArrow = leftArrows[0]
-    fireEvent.click(leftArrow)
+    const leftArrow = screen.getByAltText('Left icon')
+    fireEvent.click(leftArrow) // Move back to Step 1
 
-    expect(screen.queryByText((content) => content.includes('First Step'))).toBeInTheDocument()
+    expect(screen.getByText(/First Step/)).toBeDefined()
   })
 
 })

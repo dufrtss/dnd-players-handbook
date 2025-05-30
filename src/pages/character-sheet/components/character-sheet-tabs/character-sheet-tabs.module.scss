@@ -1,3 +1,5 @@
+@import "../../design-tokens/scss-variables";
+
 .tabsRoot {
   display: flex;
   flex-direction: column;
@@ -5,10 +7,12 @@
 }
 
 .tabsTrigger {
+  padding: $spacer-s;
   flex: 1;
 
   &:hover {
     h3 {
+      color: $color-primary;
       transition: 0.2s;
     }
   }
@@ -21,16 +25,20 @@
 }
 
 .tabsTrigger[data-state="active"] {
+  color: $color-primary;
   box-shadow: inset 0 -1px 0 0 currentColor, 0 1px 0 0 currentColor;
 }
 
 .tabsList {
+  border-bottom: 1px solid $color-content-transparent;
   display: flex;
   justify-content: space-around;
 }
 
 .tabsContent {
   flex: 1;
+  padding: $spacer-m;
+  background: $color-base-lighter;
   border-radius: 0 0 5px 5px;
 
   overflow-y: auto;
@@ -39,11 +47,13 @@
 
 .tabTitle {
   text-align: center;
+  margin: $spacer-m 0 $spacer-s;
 }
 
 .accordionRoot {
   border-radius: 6px;
   width: 100%;
+  border: 1px solid $color-content;
 }
 
 .equipment {
@@ -51,21 +61,25 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    gap: $spacer-s;
 
     div {
       flex: 1;
       width: 5rem;
+      background-color: $color-base;
 
       display: flex;
       flex-direction: column;
       align-items: center;
 
+      border: 3px solid $color-base;
       border-radius: 8px;
     }
 
     p {
       width: 100%;
       text-align: center;
+      background: $color-base-lighter;
       border-radius: 0 0 6px 6px;
     }
 
@@ -96,13 +110,16 @@
       text-align: left;
       padding: 2px 6px;
       &:hover {
+        background-color: $color-base;
       }
 
       svg {
+        fill: $color-content;
         width: 1.3rem;
 
         &:hover {
           cursor: pointer;
+          fill: $color-warning;
         }
       }
     }
@@ -114,6 +131,8 @@
     margin-top: 2rem;
 
     button {
+      padding: $spacer-s;
+      background: $color-primary;
       border-radius: 4px;
 
       font-weight: bold;
@@ -121,6 +140,7 @@
 
       &:hover {
         cursor: pointer;
+        background: $color-primary-hover;
       }
     }
   }
@@ -137,6 +157,7 @@
   flex: 1;
   flex-direction: column;
   border-radius: 10px;
+  background-color: $color-base;
   padding: 10px;
   gap: 10px;
   align-items: center;
@@ -144,6 +165,7 @@
 }
 
 .abilityName {
+  background-color: $color-base-lighter;
   display: flex;
   padding: 5px;
   border-top-right-radius: 10px;
@@ -160,6 +182,7 @@
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
   grid-template-rows: 1fr 1fr;
   border-radius: 10px;
+  background-color: $color-base;
   height: 100%;
 }
 
@@ -177,6 +200,7 @@
   display: flex;
   border-top-right-radius: 10px;
   border-top-left-radius: 10px;
+  background-color: $color-base-lighter;
   padding: 10px;
   gap: 10px;
   align-items: center;
