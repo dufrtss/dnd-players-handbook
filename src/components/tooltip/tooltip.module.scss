@@ -1,15 +1,15 @@
-@import "../../design-tokens/_scss-variables.scss";
+@use "../../design-tokens/_scss-variables.scss";
 
 .radixTooltipContent {
-  background-color: $color-content;
-  padding: $spacer-s $spacer-l;
-  border-radius: $spacer-xs;
+  background-color: scss-variables.$color-content;
+  padding: scss-variables.$spacer-s scss-variables.$spacer-l;
+  border-radius: scss-variables.$spacer-xs;
   
-  color: $color-base;
+  color: scss-variables.$color-base;
   font-weight: 500;
   font-size: 14px;
 }
 
 .radixTooltipArrow {
-  fill: $color-content;
+  fill: scss-variables.$color-content;
 }

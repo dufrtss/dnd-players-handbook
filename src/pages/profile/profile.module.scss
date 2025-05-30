@@ -1,4 +1,4 @@
-@import "../../design-tokens/_scss-variables.scss";
+@use "../../design-tokens/_scss-variables.scss";
 
 .container {
   display: flex;
@@ -9,17 +9,17 @@
   display: flex;
   flex-direction:column;
   align-items: center;
-  background-color: $color-base;
-  padding: $spacer-xl $spacer-xl;
+  background-color: scss-variables.$color-base;
+  padding: scss-variables.$spacer-xl scss-variables.$spacer-xl;
 
   width: 25vw;
   min-height: 50vh;
-  border-radius: $spacer-m;
+  border-radius: scss-variables.$spacer-m;
 }
 
 .title {
-  color: $color-content;
-  margin: 0 auto $spacer-m;
+  color: scss-variables.$color-content;
+  margin: 0 auto scss-variables.$spacer-m;
 
   text-align: center;
   font-weight: bold;
@@ -30,7 +30,7 @@
   justify-content: center;
   align-items: center;
   
-  background-color: $color-base-transparent;
+  background-color: scss-variables.$color-base-transparent;
   min-height: 85px;
   min-width: 85px;
 
@@ -41,31 +41,31 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  gap: $spacer-m;
+  gap: scss-variables.$spacer-m;
 
   width: 100%;
   height: 100%;
 
   & button {
     width: 100%;
-    color: $color-base;
+    color: scss-variables.$color-base;
     font-weight: 500;
-    background: $color-secondary;
-    padding: $spacer-s;
-    border-radius: $spacer-xs;
+    background: scss-variables.$color-secondary;
+    padding: scss-variables.$spacer-s;
+    border-radius: scss-variables.$spacer-xs;
     &:hover {
-      background-color: $color-secondary-hover;
+      background-color: scss-variables.$color-secondary-hover;
     }
   }
 
   & span {
     font-size: 10px;
-    color: $color-warning;
+    color: scss-variables.$color-warning;
   }
 }
 
 .formFields {
   display: flex;
   flex-direction: column;
-  gap: $spacer-m;
+  gap: scss-variables.$spacer-m;
 }

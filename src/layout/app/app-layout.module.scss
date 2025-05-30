@@ -1,7 +1,7 @@
-@import "../../design-tokens/scss-variables";
+@use "../../design-tokens/scss-variables";
 
 .logo {
-  margin: $spacer-xl;
+  margin: scss-variables.$spacer-xl;
   text-align: center;
   img {
     width: 15rem;

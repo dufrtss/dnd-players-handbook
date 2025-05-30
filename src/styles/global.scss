@@ -1,4 +1,4 @@
-@import "./design-tokens/_scss-variables.scss";
+@use "design-tokens/_scss-variables.scss";
 
 * {
   margin: 0;
@@ -7,7 +7,7 @@
   box-sizing: border-box;
 
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
-  color: $color-content;
+  color: scss-variables.$color-content;
   line-height: 1.5;
 
   border: none;
@@ -72,8 +72,8 @@ textarea::selection {
 
 input, select {
   width: 100%;
-  padding: $spacer-s;
-  border-radius: $spacer-xs;
+  padding: scss-variables.$spacer-s;
+  border-radius: scss-variables.$spacer-xs;
   border: 2px solid rgba(0, 0, 0, 0.2);
   background-color: rgba(0, 0, 0, 0.2);
 }

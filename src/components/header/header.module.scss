@@ -1,31 +1,31 @@
-@import "../../design-tokens/scss-variables";
+@use "../../design-tokens/scss-variables";
 
 .headerStyle {
   display: flex;
   justify-content: space-between;
   align-items: center;
 
-  padding: $spacer-m $spacer-xl;
+  padding: scss-variables.$spacer-m scss-variables.$spacer-xl;
   margin-bottom: 16px;
-  background: $color-base;
-  border-radius: 0 0 $spacer-m $spacer-m;
+  background: scss-variables.$color-base;
+  border-radius: 0 0 scss-variables.$spacer-m scss-variables.$spacer-m;
 
   div {
     display: flex;
-    gap: $spacer-m;
+    gap: scss-variables.$spacer-m;
   }
 
   button {
     border-radius: 4px;
-    padding: $spacer-xs $spacer-s;
+    padding: scss-variables.$spacer-xs scss-variables.$spacer-s;
     line-height: 1;
     font-weight: 500;
     height: fit-content;
     align-items: center;
-    background-color: $color-primary;
+    background-color: scss-variables.$color-primary;
 
     &:hover {
-      background-color: $color-primary-hover;
+      background-color: scss-variables.$color-primary-hover;
     }
   }
 
@@ -40,11 +40,11 @@
 
   svg {
     width: 1.8rem;
-    fill: $color-primary;
+    fill: scss-variables.$color-primary;
   }
 
   &:hover {
-    color: $color-primary-hover;
+    color: scss-variables.$color-primary-hover;
   }
 }
 
@@ -53,7 +53,7 @@
   justify-content: center;
   align-items: center;
   
-  background-color: $color-primary;
+  background-color: scss-variables.$color-primary;
   height: 30px;
   width: 30px;
 

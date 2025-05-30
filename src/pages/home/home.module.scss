@@ -1,16 +1,16 @@
-@import "../../design-tokens/_scss-variables.scss";
+@use "../../design-tokens/_scss-variables.scss";
 
 .container {
-  padding: $spacer-xl $spacer-xxl;
+  padding: scss-variables.$spacer-xl scss-variables.$spacer-xxl;
 
   width: 100%;
   min-height: 50vh;
-  border-radius: $spacer-m;
+  border-radius: scss-variables.$spacer-m;
 }
 
 .title {
-  color: $color-content;
-  margin: 0 auto $spacer-m;
+  color: scss-variables.$color-content;
+  margin: 0 auto scss-variables.$spacer-m;
 
   text-align: center;
   font-weight: bold;
@@ -19,7 +19,7 @@
 .img {
   display: block;
   border-radius: 50%;
-  background: $color-content;
+  background: scss-variables.$color-content;
   width: 50px;
   height: 50px;
 }
@@ -30,20 +30,20 @@
   border: none !important;
   width: 20rem !important;
 
-  background: $color-secondary !important;
+  background: scss-variables.$color-secondary !important;
   margin-bottom: 4rem;
   h2,
   h3 {
-    color: $color-base;
+    color: scss-variables.$color-base;
     font-weight: bold;
   }
 
   &:hover {
-    background: $color-secondary-hover !important;
+    background: scss-variables.$color-secondary-hover !important;
     cursor: pointer;
   }
   &:disabled {
-    background: $color-content !important;
+    background: scss-variables.$color-content !important;
     cursor: default;
   }
 
@@ -54,18 +54,18 @@
   display: flex;
   flex-wrap: wrap;
   max-width: 100vw;
-  gap: $spacer-s;
+  gap: scss-variables.$spacer-s;
 }
 
 .card {
   display: flex;
   align-items: center;
-  gap: $spacer-m;
+  gap: scss-variables.$spacer-m;
 
-  padding: $spacer-m;
-  border: 1px $color-base solid;
-  border-radius: $spacer-s;
-  background: $color-base-transparent;
+  padding: scss-variables.$spacer-m;
+  border: 1px scss-variables.$color-base solid;
+  border-radius: scss-variables.$spacer-s;
+  background: scss-variables.$color-base-transparent;
 
   text-align: left;
   line-height: 10px;
@@ -90,16 +90,16 @@
   align-items: center;
   justify-content: center;
   border-radius: 50%;
-  background: $color-primary;
+  background: scss-variables.$color-primary;
   width: 60px;
   height: 60px;
 
   svg {
-    fill: $color-content;
+    fill: scss-variables.$color-content;
     width: 30px;
   }
   &:hover {
-    background: $color-primary-hover;
+    background: scss-variables.$color-primary-hover;
   }
 }
 
