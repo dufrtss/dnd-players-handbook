@@ -55,6 +55,10 @@ O projeto carece de uma refatoração extensiva - por isso, uma estratégia de r
 - Estágio 3: Aplicação de interfaces fluentes e desacoplamento do código.
 - Estágio 4: Review fina e higienização para garantir manutenibilidade.
 
+### Interface Fluente
+
+- No componente NewCharacter foi criado a interface fluente fluentApi que faz um *wrap* ao redor das requisiçoes, garantindo que todas passem por um *try* *catch* e retornem o resultado ou erro dentro de metodos .then() e .catch().
+
 ## Autores
 
 - Eduardo Freitas

@@ -2,6 +2,8 @@
 
 ## 29-05-2025
 
+- Adicionado documentacao da interface fluente implementada.
+- Adicionado dependencia Cypress para criaçao e execuçao de testes e2e.
 - Adicionado dependência Vitest para criação e execução dos testes.
 - Adicionado interface fluente para lidar com retorno de requsições na API.
 
